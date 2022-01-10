@@ -31,7 +31,10 @@ class SuperHeroViewModel : ViewModel() {
 
     fun loadList(){
         Log.println(Log.INFO, "TEST", "LoadList")
-        viewModelScope.launch {  getSH() }
+        viewModelScope.launch {
+            val client = APIClient(CIO)
+            client.getSH()
+        }
     }
 
     private suspend fun getSH(){
@@ -41,7 +44,7 @@ class SuperHeroViewModel : ViewModel() {
         val body: String = httpResponse.receive() // to parse
         Log.println(Log.INFO, "TEST", body)
 
-        val sh = Json{ignoreUnknownKeys = true}.decodeFromString<SuperHero>(body)
+        val sh = ParseSuperHero.fromJson(body)
         Log.println(Log.INFO,"TEST",sh.toString())
 
     }
