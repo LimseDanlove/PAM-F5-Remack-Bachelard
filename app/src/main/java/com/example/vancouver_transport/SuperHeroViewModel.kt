@@ -11,6 +11,8 @@ import io.ktor.client.statement.*
 import kotlinx.coroutines.launch
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.logging.*
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 class SuperHeroViewModel : ViewModel() {
 
@@ -38,5 +40,9 @@ class SuperHeroViewModel : ViewModel() {
         val httpResponse: HttpResponse = client.get("https://www.superheroapi.com/api.php/1106077463536216/1")
         val body: String = httpResponse.receive() // to parse
         Log.println(Log.INFO, "TEST", body)
+
+        //val sh = Json.decodeFromString<SuperHero>(body)
+        //Log.println(Log.INFO,"TEST",returnedPayload.toString())
+
     }
 }
