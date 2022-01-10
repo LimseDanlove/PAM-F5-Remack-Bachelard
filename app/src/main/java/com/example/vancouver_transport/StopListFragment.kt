@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +35,25 @@ class StopListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_stop_list, container, false)
+
+        val list = mutableListOf<SuperHero>();
+        list.add(SuperHero("batman"));
+        list.add(SuperHero("superman"));
+
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
+
+        val model = SuperHeroViewModel()
+        model.addSH(SuperHero("batman"));
+        model.addSH(SuperHero("superman"));
+
+        model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
+            val customAdapter = SuperHeroAdapter(model.getList())
+            recyclerView?.adapter = customAdapter
+        })
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stop_list, container, false)
+        return view
     }
 
     companion object {
