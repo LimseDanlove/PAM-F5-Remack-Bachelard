@@ -41,8 +41,8 @@ class SuperHeroViewModel : ViewModel() {
         val body: String = httpResponse.receive() // to parse
         Log.println(Log.INFO, "TEST", body)
 
-        //val sh = Json.decodeFromString<SuperHero>(body)
-        //Log.println(Log.INFO,"TEST",returnedPayload.toString())
+        val sh = Json{ignoreUnknownKeys = true}.decodeFromString<SuperHero>(body)
+        Log.println(Log.INFO,"TEST",sh.toString())
 
     }
 }
