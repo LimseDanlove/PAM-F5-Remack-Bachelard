@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/axrem/StudioProjects/PAM-F5-Remack-Bachelard/app/src/main/res/layout/activity_main.xml" value="0.13333333333333333" />
+=======
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_stop_list.xml" value="0.25" />
+>>>>>>> bd50f8c8c1bd2ceac79c5e6636e5c7803ff62e5e
       </map>
     </option>
   </component>
