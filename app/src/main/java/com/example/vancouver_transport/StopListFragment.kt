@@ -1,12 +1,19 @@
 package com.example.vancouver_transport
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import io.ktor.client.*
+import io.ktor.client.call.*
+
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,15 +44,15 @@ class StopListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stop_list, container, false)
 
-        val list = mutableListOf<SuperHero>();
-        list.add(SuperHero("batman"));
-        list.add(SuperHero("superman"));
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
 
         val model = SuperHeroViewModel()
         model.addSH(SuperHero("batman"));
         model.addSH(SuperHero("superman"));
+
+        model.loadList()
+        Log.println(Log.INFO, "TEST", "hello !")
 
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             val customAdapter = SuperHeroAdapter(model.getList())
@@ -55,6 +62,7 @@ class StopListFragment : Fragment() {
         // Inflate the layout for this fragment
         return view
     }
+
 
     companion object {
         /**
