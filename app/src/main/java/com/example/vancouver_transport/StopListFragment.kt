@@ -47,16 +47,14 @@ class StopListFragment : Fragment() {
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
 
-        val model = SuperHeroViewModel()
-        model.addSH(SuperHero("batman"));
-        model.addSH(SuperHero("superman"));
+        val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
+
+        model.testName()
 
         model.loadList()
-        Log.println(Log.INFO, "TEST", "hello !")
 
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
-            val customAdapter = SuperHeroAdapter(model.getList())
-            recyclerView?.adapter = customAdapter
+            recyclerView?.adapter = SuperHeroAdapter(model.getList())
         })
 
 

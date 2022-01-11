@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 
 class SuperHeroViewModel : ViewModel() {
 
-    private val listObj = ArrayList<SuperHero>(12)
+    private var listObj = ArrayList<SuperHero>(12)
 
     private val list = MutableLiveData<ArrayList<SuperHero>>()
 
@@ -29,23 +29,27 @@ class SuperHeroViewModel : ViewModel() {
         list.value = listObj
     }
 
+    private fun replaceList(listSH : ArrayList<SuperHero>){
+        listObj = listSH
+        list.value = listObj
+    }
+
     fun loadList(){
+        // faire en sorte que le load ne soit pas réexécuté lors d'un changement d'orientation ?
+        // cela éviterait de faire des appels réseau à chaque fois -> sort de cache
         Log.println(Log.INFO, "TEST", "LoadList")
         viewModelScope.launch {
             val client = APIClient(CIO)
-            client.getSH()
+            val listSH = client.getFirstSH(10)
+            replaceList(listSH)
         }
     }
 
-    private suspend fun getSH(){
-        Log.println(Log.INFO, "TEST", "getSH")
-        val client = HttpClient(CIO)
-        val httpResponse: HttpResponse = client.get("https://www.superheroapi.com/api.php/1106077463536216/1")
-        val body: String = httpResponse.receive() // to parse
-        Log.println(Log.INFO, "TEST", body)
-
-        val sh = ParseSuperHero.fromJson(body)
-        Log.println(Log.INFO,"TEST",sh.toString())
-
+    fun testName(){
+        viewModelScope.launch {
+            val client = APIClient(CIO)
+            val listSH = client.getSH("bat")
+            Log.println(Log.INFO,"TEST",listSH.toString())
+        }
     }
 }
