@@ -1,12 +1,9 @@
-package com.example.vancouver_transport
+package com.example.superherodex
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vancouver_transport.SuperHeroAdapter.ClickListener
-import android.os.Bundle
 
 
 //class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :

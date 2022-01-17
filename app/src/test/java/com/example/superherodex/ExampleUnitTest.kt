@@ -1,4 +1,4 @@
-package com.example.vancouver_transport
+package com.example.superherodex
 
 import org.junit.Test
 

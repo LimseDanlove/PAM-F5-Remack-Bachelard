@@ -1,17 +1,9 @@
-package com.example.vancouver_transport
+package com.example.superherodex
 
-import android.app.SearchManager
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.SearchEvent
-import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
-import android.widget.ArrayAdapter
 
-import android.widget.ListView
 import androidx.recyclerview.widget.RecyclerView
 
 

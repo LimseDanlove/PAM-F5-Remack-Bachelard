@@ -1,20 +1,15 @@
-package com.example.vancouver_transport
+package com.example.superherodex
 
-import android.util.Log
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
-import org.json.JSONArray
-import org.json.JSONObject
 
 class APIClient(cio : CIO) {
     private val client : HttpClient = HttpClient(cio)

@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/stopListFragment">
+    app:startDestination="@id/shListFragment">
 
     <fragment
-        android:id="@+id/stopListFragment"
-        android:name="com.example.vancouver_transport.StopListFragment"
-        android:label="fragment_stop_list"
-        tools:layout="@layout/fragment_stop_list"
+        android:id="@+id/shListFragment"
+        android:name="com.example.superherodex.SHListFragment"
+        android:label="fragment_sh_list"
+        tools:layout="@layout/fragment_sh_list"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
         >
         <action
-            android:id="@+id/action_stopListFragment_to_detailsFragment"
+            android:id="@+id/action_shListFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.vancouver_transport.DetailsFragment"
+        android:name="com.example.superherodex.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details"
         >
         <action
             android:id="@+id/action_detailsFragment_to_stopListFragment"
-            app:destination="@id/stopListFragment" />
+            app:destination="@id/shListFragment" />
     </fragment>
 
 </navigation>

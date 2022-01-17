@@ -1,14 +1,11 @@
-package com.example.vancouver_transport
+package com.example.superherodex
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import io.ktor.client.*
@@ -25,10 +22,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [StopListFragment.newInstance] factory method to
+ * Use the [SHListFragment.newInstance] factory method to
  * create an instance of this fragment..
  */
-class StopListFragment : Fragment() {
+class SHListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -45,7 +42,7 @@ class StopListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_stop_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_sh_list, container, false)
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
 
@@ -60,7 +57,7 @@ class StopListFragment : Fragment() {
                 setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
                     override fun onItemClick(position: Int, v: View?) {
                         val navController = findNavController()
-                        navController?.navigate(R.id.action_stopListFragment_to_detailsFragment)
+                        navController?.navigate(R.id.action_shListFragment_to_detailsFragment)
                     }
                 })
             }
@@ -90,7 +87,7 @@ class StopListFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            StopListFragment().apply {
+            SHListFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
