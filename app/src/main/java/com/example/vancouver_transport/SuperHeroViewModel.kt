@@ -45,11 +45,12 @@ class SuperHeroViewModel : ViewModel() {
         }
     }
 
-    fun testName(){
+    fun getListName(query : String){
         viewModelScope.launch {
             val client = APIClient(CIO)
-            val listSH = client.getSH("bat")
+            val listSH = client.getSH(query)
             Log.println(Log.INFO,"TEST",listSH.toString())
+            replaceList(listSH)
         }
     }
 }

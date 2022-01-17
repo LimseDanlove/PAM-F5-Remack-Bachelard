@@ -9,7 +9,8 @@ import com.example.vancouver_transport.SuperHeroAdapter.ClickListener
 import android.os.Bundle
 
 
-class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
+//class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
+class SuperHeroAdapter(private val model: SuperHeroViewModel) :
     RecyclerView.Adapter<SuperHeroAdapter.ViewHolder>() {
 
     // Static attribute
@@ -48,11 +49,11 @@ class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
 
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
-            viewHolder.textView.text = dataSet.value?.get(position).toString()
+            viewHolder.textView.text = model.getList().value?.get(position).toString()
         }
 
         // Return the size of your dataset (invoked by the layout manager)
-        override fun getItemCount() = dataSet.value?.size ?: 0
+        override fun getItemCount() = model.getList().value?.size ?: 0
 
 
         interface ClickListener {
@@ -63,6 +64,9 @@ class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
             Companion.clickListener = clickListener
         }
 
+        fun filter(query : String) {
+            model.getListName(query)
+        }
 }
 
 
