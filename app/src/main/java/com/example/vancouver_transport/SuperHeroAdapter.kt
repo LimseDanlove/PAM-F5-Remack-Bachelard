@@ -5,24 +5,34 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vancouver_transport.SuperHeroAdapter.ClickListener
+import android.os.Bundle
+
 
 class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
     RecyclerView.Adapter<SuperHeroAdapter.ViewHolder>() {
+
+    // Static attribute
+    companion object {
+        private var clickListener: ClickListener? = null
+    }
 
     /**
       * Provide a reference to the type of views that you are using
       * (custom ViewHolder).
     */
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
             val textView: TextView = view.findViewById(R.id.tv_sh_row)
-            /*private var currentRow : String? = null
 
             init {
-                // Define click listener for the ViewHolder's View.
-                view.setOnClickListener {
-                    Toast.makeText(view.context, "Pouet", Toast.LENGTH_SHORT).show()
-                }
-            }*/
+                view.setOnClickListener(this)
+            }
+
+            override fun onClick(v: View?) {
+                clickListener?.onItemClick(adapterPosition, v)
+            }
+
+
         }
 
         // Create new views (invoked by the layout manager)
@@ -44,4 +54,15 @@ class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = dataSet.value?.size ?: 0
 
+
+        interface ClickListener {
+            fun onItemClick(position: Int, v: View?)
+        }
+
+        fun setOnItemClickListener(clickListener: ClickListener) {
+            Companion.clickListener = clickListener
+        }
+
 }
+
+

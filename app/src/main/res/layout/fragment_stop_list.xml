@@ -5,7 +5,10 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StopListFragment">
+    tools:context=".StopListFragment"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/nav_graph"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 

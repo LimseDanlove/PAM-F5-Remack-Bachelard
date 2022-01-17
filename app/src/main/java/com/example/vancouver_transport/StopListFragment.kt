@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -44,7 +47,6 @@ class StopListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stop_list, container, false)
 
-
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
 
         val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
@@ -54,24 +56,22 @@ class StopListFragment : Fragment() {
         model.loadList()
 
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
-            recyclerView?.adapter = SuperHeroAdapter(model.getList())
+            recyclerView?.adapter = SuperHeroAdapter(model.getList()).apply {
+                setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
+                    override fun onItemClick(position: Int, v: View?) {
+                        val navController = findNavController()
+                        navController?.navigate(R.id.action_stopListFragment_to_detailsFragment)
+                    }
+                })
+            }
+
         })
 
-
-        // Navigation component
-        /*val button = view.findViewById<Button>(R.id.bouton)
-
-        button?.setOnClickListener {
-            val text_view = view.findViewById<TextView>(R.id.textView)
-            val text = view.findViewById<EditText>(R.id.textInputEditText)
-            text_view?.text = text?.text
-            Toast.makeText(activity, getString(R.string.toast_main), Toast.LENGTH_SHORT).show()
-
-            val navController = this.findNavController()
-            navController.navigate(R.id.action_fragment_to_fragment2)
-        }
-        */
-
+        /*{
+            //val navController = this.findNavController()
+            //navController.navigate(R.id.action_stopListFragment_to_detailsFragment)
+            Toast.makeText(activity, "Youhou", Toast.LENGTH_SHORT).show()
+        }*/
 
         // Inflate the layout for this fragment
         return view
