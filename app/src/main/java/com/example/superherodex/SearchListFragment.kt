@@ -1,10 +1,12 @@
 package com.example.superherodex
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -52,6 +54,7 @@ class SearchListFragment : Fragment() {
 
         //model.loadList()
 
+        /*
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             recyclerView?.adapter = SuperHeroAdapter(model).apply {
                 setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
@@ -62,6 +65,33 @@ class SearchListFragment : Fragment() {
                 })
             }
 
+        })*/
+
+        val searchView = view?.findViewById<SearchView>(R.id.searchView)
+        if (searchView == null){
+            Log.println(Log.INFO,"TEST","null search view")
+        }
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                /*val adapter = recyclerView?.adapter as SuperHeroAdapter
+                if (p0 != null) {
+                    adapter?.filter(p0)
+                }*/
+                Log.println(Log.INFO,"TEST","onQueryTextSubmit")
+                // recyclerView is null
+                recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
+                    if (p0 != null) {
+                        filter(p0)
+                    }
+                }
+
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                Log.println(Log.INFO,"TEST","onQueryTextChange")
+                return false
+            }
         })
 
 
