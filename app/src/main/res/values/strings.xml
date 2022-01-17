@@ -2,5 +2,5 @@
     <string name="app_name">Superherodex</string>
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="title_list">Example of available superheros</string>
+    <string name="title_list">My favorites</string>
 </resources>
