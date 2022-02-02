@@ -67,7 +67,7 @@ class SearchListFragment : Fragment() {
 
         })*/
 
-        val searchView = view?.findViewById<SearchView>(R.id.searchView)
+        /*val searchView = view?.findViewById<SearchView>(R.id.searchView)
         if (searchView == null){
             Log.println(Log.INFO,"TEST","null search view")
         }
@@ -92,7 +92,7 @@ class SearchListFragment : Fragment() {
                 Log.println(Log.INFO,"TEST","onQueryTextChange")
                 return false
             }
-        })
+        })*/
 
 
         // Inflate the layout for this fragment

@@ -74,7 +74,10 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewSearch)
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (recyclerView == null) {
+                    Log.println(Log.INFO,"TEST","recycler view null")
+                }
                 /*val adapter = recyclerView?.adapter as SuperHeroAdapter
                 if (p0 != null) {
                     adapter?.filter(p0)
@@ -82,10 +85,9 @@ class MainActivity : AppCompatActivity() {
                 Log.println(Log.INFO,"TEST","onQueryTextSubmit")
                 // recyclerView is null
                 recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
-
-
-                    if (p0 != null) {
-                        filter(p0)
+                    if (query != null) {
+                        Log.println(Log.INFO,"TEST",query)
+                        filter(query)
                     }
                 }
 

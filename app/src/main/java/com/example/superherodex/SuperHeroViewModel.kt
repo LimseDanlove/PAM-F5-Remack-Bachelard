@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.superherodex.model.SuperHero
 import kotlinx.coroutines.launch
 import io.ktor.client.engine.cio.*
 

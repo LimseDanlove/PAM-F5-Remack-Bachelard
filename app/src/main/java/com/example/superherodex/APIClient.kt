@@ -1,5 +1,6 @@
 package com.example.superherodex
 
+import com.example.superherodex.model.SuperHero
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -14,7 +15,7 @@ import kotlinx.serialization.json.jsonObject
 class APIClient(cio : CIO) {
     private val client : HttpClient = HttpClient(cio)
 
-    suspend fun getSH(id : Int) : SuperHero{
+    suspend fun getSH(id : Int) : SuperHero {
         val httpResponse: HttpResponse = client.get("https://www.superheroapi.com/api.php/1106077463536216/$id")
         val body: String = httpResponse.receive()
         // is it the right place to parse ? (separation of concerns)
