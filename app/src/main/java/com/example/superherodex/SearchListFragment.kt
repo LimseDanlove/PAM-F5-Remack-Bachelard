@@ -67,36 +67,19 @@ class SearchListFragment : Fragment() {
 
         })*/
 
-        /*val searchView = view?.findViewById<SearchView>(R.id.searchView)
-        if (searchView == null){
-            Log.println(Log.INFO,"TEST","null search view")
-        }
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                /*val adapter = recyclerView?.adapter as SuperHeroAdapter
-                if (p0 != null) {
-                    adapter?.filter(p0)
-                }*/
-                Log.println(Log.INFO,"TEST","onQueryTextSubmit")
-                // recyclerView is null
-                recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
-                    if (p0 != null) {
-                        filter(p0)
-                    }
-                }
-
-                return false
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                Log.println(Log.INFO,"TEST","onQueryTextChange")
-                return false
-            }
-        })*/
-
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    fun querySubmit(query: String?) {
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
+        recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
+            if (query != null) {
+                filter(query)
+            }
+        }
+
     }
 
 

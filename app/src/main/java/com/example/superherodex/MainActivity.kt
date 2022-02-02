@@ -9,8 +9,10 @@ import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 
 import androidx.recyclerview.widget.RecyclerView
+import com.example.superherodex.SearchListFragment as SearchListFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,25 +73,16 @@ class MainActivity : AppCompatActivity() {
         // Assign the listener to that action item
         actionMenuItem?.setOnActionExpandListener(expandListener)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewSearch)
+        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewSearch)
+        // Find fragment affiché puis cast
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (recyclerView == null) {
-                    Log.println(Log.INFO,"TEST","recycler view null")
-                }
-                /*val adapter = recyclerView?.adapter as SuperHeroAdapter
-                if (p0 != null) {
-                    adapter?.filter(p0)
-                }*/
                 Log.println(Log.INFO,"TEST","onQueryTextSubmit")
-                // recyclerView is null
-                recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
-                    if (query != null) {
-                        Log.println(Log.INFO,"TEST",query)
-                        filter(query)
-                    }
-                }
+                val navFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+                val searchFragment = navFragment.childFragmentManager.fragments[0] as SearchListFragment
+
+                searchFragment.querySubmit(query);
 
                 return false
             }
