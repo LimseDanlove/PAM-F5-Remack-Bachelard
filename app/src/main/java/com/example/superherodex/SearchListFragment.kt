@@ -44,7 +44,7 @@ class SearchListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_sh_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_search_list, container, false)
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
 
