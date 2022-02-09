@@ -1,5 +1,6 @@
 package com.example.superherodex
 
+import android.app.Notification
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,57 +13,52 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 
 import androidx.recyclerview.widget.RecyclerView
+import io.ktor.util.reflect.*
+import java.lang.Exception
 import com.example.superherodex.SearchListFragment as SearchListFragment
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var menuId : Int = R.menu.menu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-
-        /*val searchView = findViewById<SearchView>(R.id.searchView)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewSearch)
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                /*val adapter = recyclerView?.adapter as SuperHeroAdapter
-                if (p0 != null) {
-                    adapter?.filter(p0)
-                }*/
-                // recyclerView is null
-                recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
-                    if (p0 != null) {
-                        filter(p0)
-                    }
-                }
-
-                return false
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                return false
-            }
-        })*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
+        menuInflater.inflate(menuId, menu)
 
-        val searchItem = menu?.findItem(R.id.action_search)
-        val searchView = searchItem?.actionView as SearchView
-
-        // Define the listener
+        // Define the listener for search view
         val expandListener = object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                val navController = findNavController(findViewById(R.id.fragmentContainerView))
-                navController?.navigate(R.id.action_searchListFragment_to_shListFragment)
+                //val navController = findNavController(findViewById(R.id.fragmentContainerView))
+                //navController?.navigate(R.id.action_searchListFragment_to_shListFragment)
                 return true // Return true to collapse action view
             }
 
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                val navController = findNavController(findViewById(R.id.fragmentContainerView))
-                navController?.navigate(R.id.action_shListFragment_to_searchListFragment)
+                when(item.itemId) {
+                    R.id.action_search -> {
+                        // Maybe move this to onOptionsItemSelected
+                        val navController = findNavController(findViewById(R.id.fragmentContainerView))
+                        var action = navController.currentDestination?.getAction(R.id.action_shListFragment_to_searchListFragment)
+                        if(action != null){
+                            navController?.navigate(R.id.action_shListFragment_to_searchListFragment)
+                        }
+
+                        /*try {
+                            navController?.navigate(R.id.action_shListFragment_to_searchListFragment)
+                        } catch (e : Exception){
+                            // C'est kk : on peut accéder au search depuis deux fragment différent,
+                            // l'action ne correspond donc pas tout le temps
+                            // il vaudrait mieux faire un if en fonciton de la situation ?
+                            // Après ça reste assez logique qu'on ne puisse rien faire si on n'est pas au bon endroit ?
+                        }*/
+                    }
+                }
                 return true
             }
         }
@@ -70,33 +66,42 @@ class MainActivity : AppCompatActivity() {
         // Get the MenuItem for the action item
         val actionMenuItem = menu?.findItem(R.id.action_search)
 
-        // Assign the listener to that action item
-        actionMenuItem?.setOnActionExpandListener(expandListener)
+        if(actionMenuItem != null) {
+            val searchView = actionMenuItem?.actionView as SearchView
+            // Assign the listener to that action item
+            actionMenuItem?.setOnActionExpandListener(expandListener)
 
-        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewSearch)
-        // Find fragment affiché puis cast
+            searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    Log.println(Log.INFO, "TEST", "onQueryTextSubmit")
+                    val navFragment =
+                        supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+                    val searchFragment =
+                        navFragment.childFragmentManager.fragments[0] as SearchListFragment
 
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.println(Log.INFO,"TEST","onQueryTextSubmit")
-                val navFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-                val searchFragment = navFragment.childFragmentManager.fragments[0] as SearchListFragment
+                    searchFragment.querySubmit(query);
 
-                searchFragment.querySubmit(query);
+                    return false
+                }
 
-                return false
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                //Log.println(Log.INFO,"TEST","onQueryTextChange")
-                return false
-            }
-        })
-
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    //Log.println(Log.INFO,"TEST","onQueryTextChange")
+                    return false
+                }
+            })
+        }
 
 
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    fun changeMenu(menuId: Int){
+        //Check if it's already set to not reset it (and reset the layout of the action bar)
+        if(menuId != this.menuId) {
+            this.menuId = menuId
+            invalidateOptionsMenu()
+        }
     }
 
     /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -48,35 +49,32 @@ class SearchListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search_list, container, false)
 
-        //val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSearch);
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSearch);
 
-        //model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
-
-        //model.testName()
-
-        //model.loadList()
-
-
-        /*model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
+        model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             recyclerView?.adapter = SuperHeroAdapter(model).apply {
                 setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
                     override fun onItemClick(position: Int, v: View?) {
                         val navController = findNavController()
-                        navController?.navigate(R.id.action_shListFragment_to_detailsFragment)
+                        val bundle = bundleOf("superhero" to model.getList().value?.get(position))
+                        navController?.navigate(
+                            R.id.action_searchListFragment_to_detailsFragment,
+                            bundle
+                        )
                     }
                 })
             }
-
-        })*/
-
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSearch);
-
-        model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
-            recyclerView?.adapter = SuperHeroAdapter(model) }
-        )
+        })
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val activity = this.activity as MainActivity
+        activity.changeMenu(R.menu.menu)
     }
 
     fun querySubmit(query: String?) {
