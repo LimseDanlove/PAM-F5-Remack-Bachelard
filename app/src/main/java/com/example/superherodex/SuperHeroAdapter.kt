@@ -60,10 +60,6 @@ class SuperHeroAdapter(private val model: SuperHeroViewModel) :
         fun setOnItemClickListener(clickListener: ClickListener) {
             Companion.clickListener = clickListener
         }
-
-        fun filter(query : String) {
-            model.getListName(query)
-        }
 }
 
 

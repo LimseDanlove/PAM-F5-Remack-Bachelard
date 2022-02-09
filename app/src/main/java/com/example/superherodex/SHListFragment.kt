@@ -9,6 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superherodex.model.SuperHero
+import android.content.Intent
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,13 +42,8 @@ class SHListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sh_list, container, false)
-
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
-
         val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
-
-        //model.testName()
-
         model.loadList()
 
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
@@ -52,20 +51,14 @@ class SHListFragment : Fragment() {
                 setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
                     override fun onItemClick(position: Int, v: View?) {
                         val navController = findNavController()
-                        navController?.navigate(R.id.action_shListFragment_to_detailsFragment)
+                        val bundle = bundleOf("superhero" to model.getList().value?.get(position))
+                        navController?.navigate(R.id.action_shListFragment_to_detailsFragment, bundle)
                     }
                 })
             }
 
         })
 
-        /*{
-            //val navController = this.findNavController()
-            //navController.navigate(R.id.action_stopListFragment_to_detailsFragment)
-            Toast.makeText(activity, "Youhou", Toast.LENGTH_SHORT).show()
-        }*/
-
-        // Inflate the layout for this fragment
         return view
     }
 

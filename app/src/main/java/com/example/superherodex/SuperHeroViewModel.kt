@@ -47,4 +47,5 @@ class SuperHeroViewModel : ViewModel() {
             replaceList(listSH)
         }
     }
+
 }

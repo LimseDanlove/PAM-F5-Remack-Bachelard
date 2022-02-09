@@ -10,6 +10,7 @@ import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.superherodex.model.SuperHero
 import io.ktor.client.*
 import io.ktor.client.call.*
 
@@ -31,6 +32,7 @@ class SearchListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var model: SuperHeroViewModel = SuperHeroViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +48,16 @@ class SearchListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search_list, container, false)
 
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
+        //val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSearch);
 
-        val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
+        //model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
 
         //model.testName()
 
         //model.loadList()
 
-        /*
-        model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
+
+        /*model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             recyclerView?.adapter = SuperHeroAdapter(model).apply {
                 setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
                     override fun onItemClick(position: Int, v: View?) {
@@ -67,17 +69,19 @@ class SearchListFragment : Fragment() {
 
         })*/
 
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSearch);
+
+        model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
+            recyclerView?.adapter = SuperHeroAdapter(model) }
+        )
 
         // Inflate the layout for this fragment
         return view
     }
 
     fun querySubmit(query: String?) {
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
-        recyclerView?.adapter = SuperHeroAdapter(SuperHeroViewModel()).apply {
-            if (query != null) {
-                filter(query)
-            }
+        if (query != null) {
+            model.getListName(query)
         }
 
     }

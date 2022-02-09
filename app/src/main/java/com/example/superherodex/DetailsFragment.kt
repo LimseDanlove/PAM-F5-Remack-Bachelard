@@ -1,10 +1,13 @@
 package com.example.superherodex
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.example.superherodex.model.SuperHero
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,14 +22,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class DetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var sh: SuperHero? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            sh = it.get("superhero") as SuperHero?
         }
     }
 
@@ -36,18 +38,13 @@ class DetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_details, container, false)
-        /*val button = view.findViewById<Button>(R.id.bouton)
 
-        button?.setOnClickListener {
-            val text_view = view.findViewById<TextView>(R.id.textView)
-            val text = view.findViewById<EditText>(R.id.textInputEditText)
-            text_view?.text = text?.text
-            Toast.makeText(activity, getString(R.string.toast_main), Toast.LENGTH_SHORT).show()
+        val textName = view.findViewById<TextView>(R.id.name)
+        textName.text = sh?.getName()
 
-            val navController = this.findNavController()
-            navController.navigate(R.id.action_fragment_to_fragment2)
-        }
-*/
+
+
+
         return view
     }
 
