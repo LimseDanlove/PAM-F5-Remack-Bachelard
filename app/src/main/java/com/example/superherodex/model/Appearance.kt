@@ -8,15 +8,15 @@ import java.util.Collections.copy
 @Serializable
 class Appearance() {
     @SerialName("eye-color")
-    private var eye_color: String = ""
+    var eye_color: String = ""
 
     @SerialName("hair-color")
-    private var hair_color: String = ""
+    var hair_color: String = ""
 
-    private var gender: String = ""
-    private var race: String = ""
-    private var height: Array<String?> = Array<String?>(2) {null}
-    private var weight: Array<String?> = Array<String?>(2) {null}
+    var gender: String = ""
+    var race: String = ""
+    var height: Array<String?> = Array<String?>(2) {null}
+    var weight: Array<String?> = Array<String?>(2) {null}
 
     constructor(eye_color: String, hair_color: String, gender: String, race: String, height: Array<String>, weight: Array<String>) : this() {
         this.eye_color = eye_color

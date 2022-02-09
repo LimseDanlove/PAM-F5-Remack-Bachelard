@@ -107,7 +107,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/eyeColor"
+        android:id="@+id/eye_color"
         android:layout_width="98dp"
         android:layout_height="17dp"
         android:layout_marginStart="36dp"
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/hairColor"
+        android:id="@+id/hair_color"
         android:layout_width="98dp"
         android:layout_height="17dp"
         android:layout_marginStart="36dp"
@@ -167,7 +167,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/firstAppearance"
+        android:id="@+id/first_appearance"
         android:layout_width="170dp"
         android:layout_height="23dp"
         android:layout_marginStart="36dp"
