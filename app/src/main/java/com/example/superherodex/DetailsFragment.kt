@@ -98,6 +98,15 @@ class DetailsFragment : Fragment() {
         activity.changeMenu(R.menu.menu_details)
     }
 
+    fun addFavorite() {
+        val db = AppDatabase.getInstance(requireContext());
+        val shDao = db.shDao()
+
+
+        shDao.insert(SuperHeroData(sh!!.id, sh!!.name, sh!!.biography.full_name, sh!!.biography.first_appearance, sh!!.biography.publisher, sh!!.biography.alignment,
+            sh!!.appearance.height[0]!!, sh!!.appearance.height[1]!!, sh!!.appearance.weight[0]!!, sh!!.appearance.weight[1]!!, sh!!.appearance.eye_color, sh!!.appearance.hair_color, sh!!.appearance.gender, sh!!.appearance.race, sh!!.work.occupation, sh!!.image.url, sh!!.connections.group_affiliation, sh!!.connections.relatives ))
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

@@ -12,8 +12,8 @@ interface SuperHeroDAO {
     fun getAll(): List<SuperHeroData>
 
     @Insert
-    fun insertAll(vararg users: SuperHeroData)
+    fun insert(vararg sh: SuperHeroData)
 
     @Delete
-    fun delete(user: SuperHeroData)
+    fun delete(sh: SuperHeroData)
 }

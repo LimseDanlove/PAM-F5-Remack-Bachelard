@@ -91,6 +91,25 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+        val favoriteMenuItem = menu?.findItem(R.id.action_favorite)
+
+        if(favoriteMenuItem != null) {
+            val onClickListener = object: MenuItem.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when(item?.itemId) {
+                        R.id.action_favorite -> {
+                            val navFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+                            val detailFragment = navFragment.childFragmentManager.fragments[0] as DetailsFragment
+
+                            detailFragment.addFavorite()
+                        }
+                    }
+
+                    return false
+                }
+            }
+            favoriteMenuItem.setOnMenuItemClickListener(onClickListener)
+        }
 
 
         return super.onCreateOptionsMenu(menu)
