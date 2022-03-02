@@ -46,7 +46,7 @@ class SHListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sh_list, container, false)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
         val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
-        model.loadList()
+        model.loadList(requireContext())
 
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             recyclerView?.adapter = SuperHeroAdapter(model).apply {

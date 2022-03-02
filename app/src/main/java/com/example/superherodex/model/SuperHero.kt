@@ -1,6 +1,7 @@
 package com.example.superherodex.model
 
 import android.os.Parcelable
+import com.example.superherodex.SuperHeroData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.parcelize.Parcelize
@@ -8,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Serializable
 class SuperHero() : Parcelable {
+    var id: Int = 0
     var name: String = ""
 
     //@SerialName("biography")
@@ -18,8 +20,14 @@ class SuperHero() : Parcelable {
     var connections: Connections = Connections()
 
 
-    constructor(name: String) : this() {
-        this.name = name
+    constructor(shd: SuperHeroData) : this() {
+        this.id = shd.id
+        this.name = shd.name
+        this.biography = Biography(shd.fullname, shd.first_appearance, shd.publisher, shd.alignment)
+        this.appearance = Appearance(shd.eye_color, shd.hair_color, shd.gender, shd.race, arrayOf(shd.height_en, shd.height_fr), arrayOf(shd.weight_en, shd.weight_fr))
+        this.work = Work(shd.occupation)
+        this.image = Image(shd.url)
+        this.connections = Connections(shd.group_affiliation, shd.relatives)
     }
 
     override fun toString(): String {

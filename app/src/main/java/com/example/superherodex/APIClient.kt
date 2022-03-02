@@ -1,5 +1,6 @@
 package com.example.superherodex
 
+import android.util.Log
 import com.example.superherodex.model.SuperHero
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -46,13 +47,15 @@ class APIClient(cio : CIO) {
             // get body as JsonElement object
             val jsonBody : JsonElement = Json.decodeFromString(JsonElement.serializer(),httpResponse.receive())
 
-            // get "results" JsonElement
-            val results = Json.decodeFromString(JsonElement.serializer(),jsonBody.jsonObject["results"].toString())
-
             // parse each result from array results
-            for (i in 0 until results.jsonArray.size) {
-                // right place to parse ?
-                listSH.add(ParseSuperHero.fromJson(results.jsonArray[i].toString()))
+            if(jsonBody.jsonObject["results"] != null) {
+                // get "results" JsonElement
+                val results = Json.decodeFromString(JsonElement.serializer(),jsonBody.jsonObject["results"].toString())
+
+                for (i in 0 until results.jsonArray.size) {
+                    // right place to parse ?
+                    listSH.add(ParseSuperHero.fromJson(results.jsonArray[i].toString()))
+                }
             }
         }
         return listSH
