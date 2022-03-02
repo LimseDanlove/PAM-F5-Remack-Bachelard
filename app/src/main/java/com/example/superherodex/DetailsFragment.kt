@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import coil.load
 import com.example.superherodex.model.SuperHero
 
 
@@ -23,7 +25,6 @@ private const val ARG_PARAM2 = "param2"
 class DetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var sh: SuperHero? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +40,52 @@ class DetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_details, container, false)
 
+        // General infos
         val textName = view.findViewById<TextView>(R.id.name)
-        textName.text = sh?.getName()
+        val textFullName = view.findViewById<TextView>(R.id.full_name)
+        val textGender = view.findViewById<TextView>(R.id.gender)
+        val textRace = view.findViewById<TextView>(R.id.race)
+        val textOccupation = view.findViewById<TextView>(R.id.occupation)
+        val image = view.findViewById<ImageView>(R.id.imageView)
+
+        textName.text = sh?.name
+        textFullName.text = sh?.biography?.full_name
+        textGender.text = sh?.appearance?.gender
+        textRace.text = sh?.appearance?.race
+        textOccupation.text = sh?.work?.occupation
+        image.load(sh?.image?.url) {
+            placeholder(R.drawable.ic_not_loaded)
+        }
 
 
+        // Physical appearance
+        val textWeight = view.findViewById<TextView>(R.id.weight)
+        val textHeight = view.findViewById<TextView>(R.id.height)
+        val textEyeColor = view.findViewById<TextView>(R.id.eye_color)
+        val textHairColor = view.findViewById<TextView>(R.id.hair_color)
+
+        textWeight.text = sh?.appearance?.weight?.get(1)
+        textHeight.text = sh?.appearance?.height?.get(1)
+        textEyeColor.text = sh?.appearance?.eye_color
+        textHairColor.text = sh?.appearance?.hair_color
+
+
+        // Life in comics
+        val textPublisher = view.findViewById<TextView>(R.id.publisher)
+        val textFirstAppearance = view.findViewById<TextView>(R.id.first_appearance)
+        val textAlignment = view.findViewById<TextView>(R.id.alignement)
+
+        textPublisher.text = sh?.biography?.publisher
+        textFirstAppearance.text = sh?.biography?.first_appearance
+        textAlignment.text = sh?.biography?.alignment
+
+
+        // Connections
+        val textGroup = view.findViewById<TextView>(R.id.group)
+        val textFamily = view.findViewById<TextView>(R.id.family)
+
+        textGroup.text = sh?.connections?.group_affiliation
+        textFamily.text = sh?.connections?.relatives
 
 
         return view

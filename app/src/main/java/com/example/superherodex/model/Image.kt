@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Image() {
-    private var url: String = ""
+    var url: String = ""
 
     constructor(url: String) : this() {
         this.url = url

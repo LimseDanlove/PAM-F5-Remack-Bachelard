@@ -1,186 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="16dp"
-        android:text="name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/full_name"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="16dp"
-        android:text="full name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="56dp"
-        android:text="gender"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Name"
+            android:textSize="28sp"
+            android:textStyle="italic"
+            android:typeface="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/catPhysical"
-        android:layout_width="206dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="176dp"
-        android:text="Physical Appearance"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/full_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/full_name6"
+            app:layout_constraintTop_toTopOf="@+id/full_name6" />
 
-    <TextView
-        android:id="@+id/catComics"
-        android:layout_width="206dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="296dp"
-        android:text="Life in Comics"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/full_name6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/full_name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/catConnections"
-        android:layout_width="206dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="428dp"
-        android:text="Connections"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gender3"
+            app:layout_constraintTop_toTopOf="@+id/gender3" />
 
-    <TextView
-        android:id="@+id/race"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="92dp"
-        android:text="race"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/gender3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/gender"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/full_name6"
+            app:layout_constraintTop_toBottomOf="@+id/full_name" />
 
-    <TextView
-        android:id="@+id/occupation"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="124dp"
-        android:text="occupation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/catPhysical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/cat_physical"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/weight"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="204dp"
-        android:text="weight"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/catComics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/cat_comics"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/catPhysical"
+            app:layout_constraintTop_toBottomOf="@+id/hair_color2" />
 
-    <TextView
-        android:id="@+id/height"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="228dp"
-        android:text="height"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/alignement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/alignement2"
+            app:layout_constraintTop_toTopOf="@+id/alignement2" />
 
-    <TextView
-        android:id="@+id/eyeColor"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="248dp"
-        android:text="eye color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/alignement2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/alignment"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/first_appearance2"
+            app:layout_constraintTop_toBottomOf="@+id/first_appearance" />
 
-    <TextView
-        android:id="@+id/hairColor"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="264dp"
-        android:text="hair color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/first_appearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/first_appearance2"
+            app:layout_constraintTop_toTopOf="@+id/first_appearance2" />
 
-    <TextView
-        android:id="@+id/publisher"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="324dp"
-        android:text="publisher"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/first_appearance2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/first_appearance"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/publisher2"
+            app:layout_constraintTop_toBottomOf="@+id/publisher" />
 
-    <TextView
-        android:id="@+id/alignement"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="380dp"
-        android:text="alignement"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/group2"
+            app:layout_constraintTop_toTopOf="@+id/group2" />
 
-    <TextView
-        android:id="@+id/group"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="456dp"
-        android:text="group"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/group2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/group"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/catConnections"
+            app:layout_constraintTop_toBottomOf="@+id/catConnections" />
 
-    <TextView
-        android:id="@+id/family"
-        android:layout_width="98dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="480dp"
-        android:text="family"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/family"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="72dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/family2"
+            app:layout_constraintTop_toTopOf="@+id/family2" />
 
-    <TextView
-        android:id="@+id/firstAppearance"
-        android:layout_width="170dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="348dp"
-        android:text="first appearance"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/family2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/family"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/group2"
+            app:layout_constraintTop_toBottomOf="@+id/group" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:srcCompat="@tools:sample/avatars" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/publisher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/publisher2"
+            app:layout_constraintTop_toTopOf="@+id/publisher2" />
+
+        <TextView
+            android:id="@+id/publisher2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/publisher"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/catComics"
+            app:layout_constraintTop_toBottomOf="@+id/catComics" />
+
+        <TextView
+            android:id="@+id/catConnections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/cat_connections"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/catComics"
+            app:layout_constraintTop_toBottomOf="@+id/alignement2" />
+
+        <TextView
+            android:id="@+id/race"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/race3"
+            app:layout_constraintTop_toTopOf="@+id/race3" />
+
+        <TextView
+            android:id="@+id/race3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/race"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/gender3"
+            app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+        <TextView
+            android:id="@+id/occupation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/occupation3"
+            app:layout_constraintTop_toTopOf="@+id/occupation3" />
+
+        <TextView
+            android:id="@+id/occupation3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/occupation"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/race3"
+            app:layout_constraintTop_toBottomOf="@+id/race" />
+
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/weight2"
+            app:layout_constraintTop_toTopOf="@+id/weight2" />
+
+        <TextView
+            android:id="@+id/weight2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/weight"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/catPhysical"
+            app:layout_constraintTop_toBottomOf="@+id/catPhysical" />
+
+        <TextView
+            android:id="@+id/height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/height2"
+            app:layout_constraintTop_toTopOf="@+id/height2" />
+
+        <TextView
+            android:id="@+id/height2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/height"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/weight2"
+            app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+        <TextView
+            android:id="@+id/eye_color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/eye_color2"
+            app:layout_constraintTop_toTopOf="@+id/eye_color2" />
+
+        <TextView
+            android:id="@+id/eye_color2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/eye_color"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/height2"
+            app:layout_constraintTop_toBottomOf="@+id/height" />
+
+        <TextView
+            android:id="@+id/hair_color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hair_color2"
+            app:layout_constraintTop_toTopOf="@+id/hair_color2" />
+
+        <TextView
+            android:id="@+id/hair_color2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/hair_color"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/eye_color2"
+            app:layout_constraintTop_toBottomOf="@+id/eye_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

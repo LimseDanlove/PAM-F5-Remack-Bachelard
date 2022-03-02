@@ -8,14 +8,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Serializable
 class SuperHero() : Parcelable {
-    private var name: String = ""
+    var name: String = ""
 
     //@SerialName("biography")
-    private var biography: Biography = Biography()
-    private var appearance: Appearance = Appearance()
-    private var work: Work = Work()
-    private var image: Image = Image()
-    private var connections: Connections = Connections()
+    var biography: Biography = Biography()
+    var appearance: Appearance = Appearance()
+    var work: Work = Work()
+    var image: Image = Image()
+    var connections: Connections = Connections()
 
 
     constructor(name: String) : this() {
@@ -26,7 +26,10 @@ class SuperHero() : Parcelable {
         return name;
     }
 
-    fun getName(): String {
-        return name
-    }
+
+
+
+
+
+
 }

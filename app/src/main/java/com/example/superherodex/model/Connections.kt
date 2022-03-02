@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 class Connections() {
     @SerialName("group-affiliation")
-    private var group_affiliation: String = ""
-    private var relatives: String = ""
+    var group_affiliation: String = ""
+    var relatives: String = ""
 
     constructor(group_affiliation: String, relatives: String) : this() {
         this.group_affiliation = group_affiliation
