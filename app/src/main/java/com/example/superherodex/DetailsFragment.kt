@@ -48,6 +48,13 @@ class DetailsFragment : Fragment() {
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        val activity = this.activity as MainActivity
+        activity.changeMenu(R.menu.menu_details)
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

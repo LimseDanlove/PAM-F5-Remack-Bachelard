@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superherodex.model.SuperHero
 import android.content.Intent
+import android.view.Menu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 
@@ -56,10 +58,21 @@ class SHListFragment : Fragment() {
                     }
                 })
             }
-
         })
 
+
+        //(activity as AppCompatActivity).setSupportActionBar(view?.findViewById(R.id.toolbar))
+        //menu.removeItem(R.id.action_search)
+
+
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val activity = this.activity as MainActivity
+        activity.changeMenu(R.menu.menu)
     }
 
 

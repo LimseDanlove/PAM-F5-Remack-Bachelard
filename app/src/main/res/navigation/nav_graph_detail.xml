@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_stopListFragment"
             app:destination="@id/shListFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_searchListFragment"
+            app:destination="@id/searchListFragment" />
     </fragment>
 
     <fragment
@@ -42,6 +45,9 @@
         <action
             android:id="@+id/action_searchListFragment_to_shListFragment"
             app:destination="@id/shListFragment" />
+        <action
+            android:id="@+id/action_searchListFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 
 </navigation>
