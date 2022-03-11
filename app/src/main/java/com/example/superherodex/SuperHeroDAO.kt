@@ -11,7 +11,7 @@ interface SuperHeroDAO {
     @Query("SELECT * FROM superhero")
     fun getAll(): List<SuperHeroData>
 
-    @Insert
+    @Insert(entity = SuperHeroData::class)
     fun insert(vararg sh: SuperHeroData)
 
     @Delete

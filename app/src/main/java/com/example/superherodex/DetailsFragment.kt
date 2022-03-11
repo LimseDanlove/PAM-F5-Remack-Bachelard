@@ -99,13 +99,17 @@ class DetailsFragment : Fragment() {
     }
 
     fun addFavorite() {
-        val db = AppDatabase.getInstance(requireContext());
+        /*val db = AppDatabase.getInstance(requireContext());
         val shDao = db.shDao()
 
 
         shDao.insert(SuperHeroData(sh!!.id, sh!!.name, sh!!.biography.full_name, sh!!.biography.first_appearance, sh!!.biography.publisher, sh!!.biography.alignment,
             sh!!.appearance.height[0]!!, sh!!.appearance.height[1]!!, sh!!.appearance.weight[0]!!, sh!!.appearance.weight[1]!!, sh!!.appearance.eye_color, sh!!.appearance.hair_color, sh!!.appearance.gender, sh!!.appearance.race, sh!!.work.occupation, sh!!.image.url, sh!!.connections.group_affiliation, sh!!.connections.relatives ))
+        */
+        val model = SuperHeroViewModel()
+        model.addSHDB(requireContext(),sh)
     }
+
 
     companion object {
         /**

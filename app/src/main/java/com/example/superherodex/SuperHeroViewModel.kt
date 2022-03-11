@@ -44,40 +44,56 @@ class SuperHeroViewModel : ViewModel() {
         }
     }*/
 
+    fun addSHDB(context: Context, sh: SuperHero?){
+        if (sh!=null) {
+            val db = AppDatabase.getInstance(context);
+
+            val shDao = db.shDao()
+
+            runBlocking(Dispatchers.Default) {
+                shDao.insert(
+                    SuperHeroData(
+                        sh!!.id,
+                        sh!!.name,
+                        sh!!.biography.full_name,
+                        sh!!.biography.first_appearance,
+                        sh!!.biography.publisher,
+                        sh!!.biography.alignment,
+                        sh!!.appearance.height[0]!!,
+                        sh!!.appearance.height[1]!!,
+                        sh!!.appearance.weight[0]!!,
+                        sh!!.appearance.weight[1]!!,
+                        sh!!.appearance.eye_color,
+                        sh!!.appearance.hair_color,
+                        sh!!.appearance.gender,
+                        sh!!.appearance.race,
+                        sh!!.work.occupation,
+                        sh!!.image.url,
+                        sh!!.connections.group_affiliation,
+                        sh!!.connections.relatives
+                    )
+                )
+            }
+        }
+
+    }
+
     fun loadList(context: Context){
-        Log.println(Log.INFO, "TEST", "LoadList")
-        /*val db = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, "superhero_database"
-        ).build()*/
         val db = AppDatabase.getInstance(context);
 
         val shDao = db.shDao()
 
-        /*var listSHData : List<SuperHeroData>
-
-        //viewModelScope.launch {
+        var listSHData : List<SuperHeroData>? = null
         runBlocking(Dispatchers.Default) {
             listSHData = shDao.getAll()
-        }*/
-
-        viewModelScope.async {
-            val listSHData = shDao.getAll()
-
-            if (listSHData != null) {
-                val listSH = ArrayList<SuperHero>()
-                for (elt in listSHData) {
-                    listSH.add(SuperHero(elt))
-                }
-                replaceList(listSH)
-            }
         }
-
-        //val shBDD = SuperHeroBDD()
-        //shBDD.open()
-        //val listSH = shBDD.getSuperHeros()
-
-
+        if (listSHData != null) {
+           val listSH = ArrayList<SuperHero>()
+           for (elt in listSHData!!) {
+               listSH.add(SuperHero(elt))
+           }
+           replaceList(listSH)
+        }
     }
 
     fun getListName(query : String){
