@@ -94,12 +94,33 @@ class DetailsFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        var found = false
+        if (sh != null) {
+            var foundSH = shService.get(sh!!)
+            if(foundSH != null){
+                found = true
+            }
+        }
         val activity = this.activity as MainActivity
-        activity.changeMenu(R.menu.menu_details)
+        activity.changeMenu(R.menu.menu_details,found)
     }
 
     fun addFavorite() {
-        shService.add(sh)
+        if(sh != null) {
+            var foundSH = shService.get(sh!!)
+            if(foundSH == null) {
+                shService.add(sh!!)
+            }
+        }
+    }
+
+    fun deleteFavorite(){
+        if(sh != null) {
+            var foundSH = shService.get(sh!!)
+            if(foundSH != null) {
+                shService.delete(sh!!)
+            }
+        }
     }
 
 

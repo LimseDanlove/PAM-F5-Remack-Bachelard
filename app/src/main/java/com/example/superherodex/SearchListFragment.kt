@@ -57,7 +57,7 @@ class SearchListFragment : Fragment() {
         super.onStart()
 
         val activity = this.activity as MainActivity
-        activity.changeMenu(R.menu.menu)
+        activity.changeMenu(R.menu.menu,false)
     }
 
     fun querySubmit(query: String?) {

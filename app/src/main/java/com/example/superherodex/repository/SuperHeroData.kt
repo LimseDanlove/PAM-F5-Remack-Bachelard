@@ -28,5 +28,4 @@ data class SuperHeroData (
 
     @ColumnInfo(name = "connections_group_affiliation") val group_affiliation: String,
     @ColumnInfo(name = "connections_relatives") val relatives: String
-
 )

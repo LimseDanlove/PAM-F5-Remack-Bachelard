@@ -9,11 +9,23 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 
 import com.example.superherodex.SearchListFragment as SearchListFragment
+import android.R.color
+
+import androidx.core.graphics.drawable.DrawableCompat
+
+import android.graphics.drawable.Drawable
+
+import android.R.string.no
+import android.annotation.SuppressLint
+import android.graphics.Color
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 
 
 class MainActivity : AppCompatActivity() {
 
     private var menuId : Int = R.menu.menu
+    private var favorite : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
     }
 
+    @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(menuId, menu)
 
@@ -83,7 +96,15 @@ class MainActivity : AppCompatActivity() {
                             val navFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
                             val detailFragment = navFragment.childFragmentManager.fragments[0] as DetailsFragment
 
-                            detailFragment.addFavorite()
+                            if (favorite) {
+                                changeItemIcon(favoriteMenuItem, R.drawable.ic_favorite)
+                                favorite = false
+                                detailFragment.deleteFavorite()
+                            } else {
+                                changeItemIcon(favoriteMenuItem, R.drawable.ic_favorite_full)
+                                favorite = true
+                                detailFragment.addFavorite()
+                            }
                         }
                     }
 
@@ -91,32 +112,33 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             favoriteMenuItem.setOnMenuItemClickListener(onClickListener)
+
+            if (favorite){
+                changeItemIcon(favoriteMenuItem,R.drawable.ic_favorite_full)
+            }
         }
 
 
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun changeMenu(menuId: Int){
+    private fun changeItemIcon(item : MenuItem, iconRes : Int){
+        val normalDrawable: Drawable? = AppCompatResources.getDrawable(applicationContext, iconRes)
+        val wrapDrawable = normalDrawable?.let { DrawableCompat.wrap(it) }
+        if (wrapDrawable != null) {
+            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(applicationContext,R.color.white))
+        }
+        item.icon = wrapDrawable
+    }
+
+
+    fun changeMenu(menuId: Int,favorite: Boolean){
+        this.favorite = favorite
+
         //Check if it's already set to not reset it (and reset the layout of the action bar)
         if(menuId != this.menuId) {
             this.menuId = menuId
             invalidateOptionsMenu()
         }
     }
-
-    /*override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_search -> {
-
-            true
-        }
-
-
-        else -> {
-            // If we got here, the user's action was not recognized.
-            // Invoke the superclass to handle it.
-            super.onOptionsItemSelected(item)
-        }
-    }*/
-
 }

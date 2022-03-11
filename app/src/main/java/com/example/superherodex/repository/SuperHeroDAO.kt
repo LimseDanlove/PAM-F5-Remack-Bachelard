@@ -7,12 +7,16 @@ import androidx.room.Query
 
 @Dao
 interface SuperHeroDAO {
+
+    @Query("SELECT * FROM superhero WHERE id = :id")
+    fun get(id: Int): SuperHeroData
+
     @Query("SELECT * FROM superhero")
     fun getAll(): List<SuperHeroData>
 
     @Insert(entity = SuperHeroData::class)
     fun insert(vararg sh: SuperHeroData)
 
-    @Delete
-    fun delete(sh: SuperHeroData)
+    @Query("DELETE FROM superhero WHERE id = :id")
+    fun delete(id: Int): Int
 }

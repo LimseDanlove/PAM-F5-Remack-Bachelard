@@ -24,41 +24,53 @@ class SHService(context: Context) {
         return listSH
     }
 
-    fun add(sh: SuperHero?){
-        if (sh!=null) {
-            val db = AppDatabase.getInstance(context);
+    fun add(sh: SuperHero){
+        val db = AppDatabase.getInstance(context)
 
-            val shDao = db.shDao()
+        val shDao = db.shDao()
 
-            runBlocking(Dispatchers.Default) {
-                shDao.insert(
-                    SuperHeroData(
-                        sh!!.id,
-                        sh!!.name,
-                        sh!!.biography.full_name,
-                        sh!!.biography.first_appearance,
-                        sh!!.biography.publisher,
-                        sh!!.biography.alignment,
-                        sh!!.appearance.height[0]!!,
-                        sh!!.appearance.height[1]!!,
-                        sh!!.appearance.weight[0]!!,
-                        sh!!.appearance.weight[1]!!,
-                        sh!!.appearance.eye_color,
-                        sh!!.appearance.hair_color,
-                        sh!!.appearance.gender,
-                        sh!!.appearance.race,
-                        sh!!.work.occupation,
-                        sh!!.image.url,
-                        sh!!.connections.group_affiliation,
-                        sh!!.connections.relatives
-                    )
+        runBlocking(Dispatchers.Default) {
+            shDao.insert(
+                SuperHeroData(
+                    sh.id,
+                    sh.name,
+                    sh.biography.full_name,
+                    sh.biography.first_appearance,
+                    sh.biography.publisher,
+                    sh.biography.alignment,
+                    sh.appearance.height[0]!!,
+                    sh.appearance.height[1]!!,
+                    sh.appearance.weight[0]!!,
+                    sh.appearance.weight[1]!!,
+                    sh.appearance.eye_color,
+                    sh.appearance.hair_color,
+                    sh.appearance.gender,
+                    sh.appearance.race,
+                    sh.work.occupation,
+                    sh.image.url,
+                    sh.connections.group_affiliation,
+                    sh.connections.relatives
                 )
-            }
+            )
         }
     }
 
+    fun get(sh: SuperHero) : SuperHero? {
+        val db = AppDatabase.getInstance(context)
+
+        val shDao = db.shDao()
+        var foundSHData : SuperHeroData? = null
+        runBlocking(Dispatchers.Default) {
+            foundSHData = shDao.get(sh.id)
+        }
+        if (foundSHData != null) {
+            return SuperHero(foundSHData!!)
+        }
+        return null
+    }
+
     fun getAll() : ArrayList<SuperHero>{
-        val db = AppDatabase.getInstance(context);
+        val db = AppDatabase.getInstance(context)
 
         val shDao = db.shDao()
 
@@ -73,5 +85,16 @@ class SHService(context: Context) {
             }
         }
         return listSH
+    }
+
+    fun delete(sh: SuperHero) : Int {
+        val db = AppDatabase.getInstance(context)
+
+        val shDao = db.shDao()
+        var res = 0
+        runBlocking(Dispatchers.Default) {
+            res = shDao.delete(sh.id)
+        }
+        return res
     }
 }

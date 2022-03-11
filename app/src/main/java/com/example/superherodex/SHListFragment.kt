@@ -56,7 +56,7 @@ class SHListFragment : Fragment() {
         super.onStart()
 
         val activity = this.activity as MainActivity
-        activity.changeMenu(R.menu.menu)
+        activity.changeMenu(R.menu.menu,false)
     }
 
 
