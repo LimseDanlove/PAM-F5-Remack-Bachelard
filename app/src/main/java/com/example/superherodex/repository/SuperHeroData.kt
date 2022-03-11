@@ -1,4 +1,4 @@
-package com.example.superherodex
+package com.example.superherodex.repository
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

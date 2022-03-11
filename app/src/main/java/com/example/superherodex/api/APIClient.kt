@@ -1,6 +1,6 @@
-package com.example.superherodex
+package com.example.superherodex.api
 
-import android.util.Log
+import com.example.superherodex.utils.ParseSuperHero
 import com.example.superherodex.model.SuperHero
 import io.ktor.client.*
 import io.ktor.client.call.*

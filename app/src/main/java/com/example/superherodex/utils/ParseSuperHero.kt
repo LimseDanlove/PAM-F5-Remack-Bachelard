@@ -1,4 +1,4 @@
-package com.example.superherodex
+package com.example.superherodex.utils
 
 import com.example.superherodex.model.SuperHero
 import kotlinx.serialization.decodeFromString

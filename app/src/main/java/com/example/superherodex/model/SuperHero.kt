@@ -1,8 +1,7 @@
 package com.example.superherodex.model
 
 import android.os.Parcelable
-import com.example.superherodex.SuperHeroData
-import kotlinx.serialization.SerialName
+import com.example.superherodex.repository.SuperHeroData
 import kotlinx.serialization.Serializable
 import kotlinx.parcelize.Parcelize
 

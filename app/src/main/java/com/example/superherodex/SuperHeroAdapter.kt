@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-//class SuperHeroAdapter(private val dataSet: LiveData<ArrayList<SuperHero>>) :
 class SuperHeroAdapter(private val model: SuperHeroViewModel) :
     RecyclerView.Adapter<SuperHeroAdapter.ViewHolder>() {
 

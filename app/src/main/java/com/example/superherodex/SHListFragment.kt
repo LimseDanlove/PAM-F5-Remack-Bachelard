@@ -9,17 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superherodex.model.SuperHero
-import android.content.Intent
-import android.view.Menu
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentManager
+import com.example.superherodex.service.SHService
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -27,16 +19,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment..
  */
 class SHListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var shService: SHService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        shService = SHService(requireContext())
     }
 
     override fun onCreateView(
@@ -46,7 +35,8 @@ class SHListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sh_list, container, false)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
         val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
-        model.loadList(requireContext())
+
+        model.replaceList(shService.getAll())
 
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             recyclerView?.adapter = SuperHeroAdapter(model).apply {
@@ -59,12 +49,6 @@ class SHListFragment : Fragment() {
                 })
             }
         })
-
-
-        //(activity as AppCompatActivity).setSupportActionBar(view?.findViewById(R.id.toolbar))
-        //menu.removeItem(R.id.action_search)
-
-
         return view
     }
 
@@ -81,18 +65,11 @@ class SHListFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment StopListFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SHListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() =
+            SHListFragment()
     }
 }

@@ -1,21 +1,20 @@
 package com.example.superherodex
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import coil.load
 import com.example.superherodex.model.SuperHero
+import com.example.superherodex.service.SHService
 
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_SH = "superhero"
 
 /**
  * A simple [Fragment] subclass.
@@ -23,14 +22,15 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class DetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var sh: SuperHero? = null
+    private lateinit var shService: SHService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            sh = it.get("superhero") as SuperHero?
+            sh = it.get(ARG_SH) as SuperHero?
         }
+        shService = SHService(requireContext())
     }
 
     override fun onCreateView(
@@ -99,15 +99,7 @@ class DetailsFragment : Fragment() {
     }
 
     fun addFavorite() {
-        /*val db = AppDatabase.getInstance(requireContext());
-        val shDao = db.shDao()
-
-
-        shDao.insert(SuperHeroData(sh!!.id, sh!!.name, sh!!.biography.full_name, sh!!.biography.first_appearance, sh!!.biography.publisher, sh!!.biography.alignment,
-            sh!!.appearance.height[0]!!, sh!!.appearance.height[1]!!, sh!!.appearance.weight[0]!!, sh!!.appearance.weight[1]!!, sh!!.appearance.eye_color, sh!!.appearance.hair_color, sh!!.appearance.gender, sh!!.appearance.race, sh!!.work.occupation, sh!!.image.url, sh!!.connections.group_affiliation, sh!!.connections.relatives ))
-        */
-        val model = SuperHeroViewModel()
-        model.addSHDB(requireContext(),sh)
+        shService.add(sh)
     }
 
 
@@ -116,17 +108,14 @@ class DetailsFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param sh Superhero.
          * @return A new instance of fragment MainFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(sh: SuperHero) =
             DetailsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    bundleOf(ARG_SH to sh)
                 }
             }
     }

@@ -1,4 +1,4 @@
-package com.example.superherodex
+package com.example.superherodex.repository
 
 import android.content.Context
 import androidx.room.Database
