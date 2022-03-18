@@ -33,5 +33,16 @@
         app:layout_constraintStart_toStartOf="@+id/listTitle2"
         app:layout_constraintTop_toBottomOf="@+id/listTitle2" />
 
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/no_data_BDD"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listTitle2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

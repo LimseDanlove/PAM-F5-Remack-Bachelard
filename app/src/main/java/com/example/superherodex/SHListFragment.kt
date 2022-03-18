@@ -1,15 +1,18 @@
 package com.example.superherodex
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superherodex.model.SuperHero
 import androidx.core.os.bundleOf
+import androidx.core.view.isEmpty
 import com.example.superherodex.service.SHService
 
 
@@ -34,7 +37,7 @@ class SHListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sh_list, container, false)
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
-        val model = SuperHeroViewModel() // Création d'un nouveau model à chaque création de fragment burk
+        val model = SuperHeroViewModel()
 
         model.replaceList(shService.getAll())
 
