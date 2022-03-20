@@ -1,0 +1,31 @@
+# 🦸 Superherodex
+
+This app is made for all superhero fans as a mean to learn more about their favorite superheros and to always keep them in their pockets. <br/>
+
+**API used** : https://www.superheroapi.com/
+
+## :sparkles: Features :sparkles:
+### Search
+Search the name of any superhero you want (as long as it is present in our API) : 
+
+![image](https://user-images.githubusercontent.com/62250627/159168204-52e01235-0612-49b0-a7f8-b3e2ad759882.png)
+
+### Details
+Consult the informations about any superhero you want (physical appearance, comics informations, links with other superheros, ...) : 
+
+![image](https://user-images.githubusercontent.com/62250627/159168320-34727169-8931-4d6b-9475-cb0a70381864.png)
+
+
+### Favorite
+Add any superhero to your favorite's list (with the heart icon accessible on the details page) for offline consultation and access them directly from the home screen :
+
+![image](https://user-images.githubusercontent.com/62250627/159168463-657b3c25-185e-4b26-a945-dd05caff7a3f.png)
+
+<br/>
+
+## ⏰ Future additions ⏰
+- [ ] Profile feature
+- [ ] Connexion interface
+- [ ] Sharing the favorite list with contacts (mail, instant message, ...)
+
+
