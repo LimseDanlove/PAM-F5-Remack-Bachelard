@@ -12,11 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.superherodex.model.SuperHero
 import com.example.superherodex.service.SHService
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SHListFragment.newInstance] factory method to
- * create an instance of this fragment..
- */
+
 class SearchListFragment : Fragment() {
 
     private var model: SuperHeroViewModel = SuperHeroViewModel()
@@ -40,22 +36,19 @@ class SearchListFragment : Fragment() {
                     override fun onItemClick(position: Int, v: View?) {
                         val navController = findNavController()
                         val bundle = bundleOf("superhero" to model.getList().value?.get(position))
-                        navController?.navigate(
-                            R.id.action_searchListFragment_to_detailsFragment,
-                            bundle
-                        )
+                        navController?.navigate(R.id.action_searchListFragment_to_detailsFragment, bundle)
                     }
                 })
             }
         })
 
-        // Inflate the layout for this fragment
         return view
     }
 
     override fun onStart() {
         super.onStart()
 
+        // Changing menu appearance to display search icon
         val activity = this.activity as MainActivity
         activity.changeMenu(R.menu.menu,false)
     }
@@ -66,7 +59,6 @@ class SearchListFragment : Fragment() {
         }
 
     }
-
 
     companion object {
         /**

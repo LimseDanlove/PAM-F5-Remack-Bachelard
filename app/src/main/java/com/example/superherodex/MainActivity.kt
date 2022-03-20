@@ -40,15 +40,12 @@ class MainActivity : AppCompatActivity() {
         // Define the listener for search view
         val expandListener = object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                //val navController = findNavController(findViewById(R.id.fragmentContainerView))
-                //navController?.navigate(R.id.action_searchListFragment_to_shListFragment)
                 return true // Return true to collapse action view
             }
 
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 when(item.itemId) {
                     R.id.action_search -> {
-                        // Maybe move this to onOptionsItemSelected
                         val navController = findNavController(findViewById(R.id.fragmentContainerView))
                         val action = navController.currentDestination?.getAction(R.id.action_shListFragment_to_searchListFragment)
                         if(action != null){
@@ -70,13 +67,9 @@ class MainActivity : AppCompatActivity() {
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    val navFragment =
-                        supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-                    val searchFragment =
-                        navFragment.childFragmentManager.fragments[0] as SearchListFragment
-
+                    val navFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+                    val searchFragment = navFragment.childFragmentManager.fragments[0] as SearchListFragment
                     searchFragment.querySubmit(query);
-
                     return false
                 }
 
@@ -86,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+        // Same for favorite menu item
         val favoriteMenuItem = menu.findItem(R.id.action_favorite)
 
         if(favoriteMenuItem != null) {
@@ -96,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                             val navFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
                             val detailFragment = navFragment.childFragmentManager.fragments[0] as DetailsFragment
 
+                            // Changing appearance of icon
                             if (favorite) {
                                 changeItemIcon(favoriteMenuItem, R.drawable.ic_favorite)
                                 favorite = false
@@ -117,7 +112,6 @@ class MainActivity : AppCompatActivity() {
                 changeItemIcon(favoriteMenuItem,R.drawable.ic_favorite_full)
             }
         }
-
 
         return super.onCreateOptionsMenu(menu)
     }

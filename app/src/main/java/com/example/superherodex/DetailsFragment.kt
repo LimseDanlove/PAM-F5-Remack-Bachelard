@@ -12,24 +12,20 @@ import coil.load
 import com.example.superherodex.model.SuperHero
 import com.example.superherodex.service.SHService
 
-
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+// Fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_SH = "superhero"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailsFragment : Fragment() {
     private var sh: SuperHero? = null
     private lateinit var shService: SHService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Passing superhero infos from general views
         arguments?.let {
             sh = it.get(ARG_SH) as SuperHero?
         }
+
         shService = SHService(requireContext())
     }
 
@@ -57,7 +53,6 @@ class DetailsFragment : Fragment() {
             placeholder(R.drawable.ic_not_loaded)
         }
 
-
         // Physical appearance
         val textWeight = view.findViewById<TextView>(R.id.weight)
         val textHeight = view.findViewById<TextView>(R.id.height)
@@ -69,7 +64,6 @@ class DetailsFragment : Fragment() {
         textEyeColor.text = sh?.appearance?.eye_color
         textHairColor.text = sh?.appearance?.hair_color
 
-
         // Life in comics
         val textPublisher = view.findViewById<TextView>(R.id.publisher)
         val textFirstAppearance = view.findViewById<TextView>(R.id.first_appearance)
@@ -79,14 +73,12 @@ class DetailsFragment : Fragment() {
         textFirstAppearance.text = sh?.biography?.first_appearance
         textAlignment.text = sh?.biography?.alignment
 
-
         // Connections
         val textGroup = view.findViewById<TextView>(R.id.group)
         val textFamily = view.findViewById<TextView>(R.id.family)
 
         textGroup.text = sh?.connections?.group_affiliation
         textFamily.text = sh?.connections?.relatives
-
 
         return view
     }
@@ -101,6 +93,8 @@ class DetailsFragment : Fragment() {
                 found = true
             }
         }
+
+        // Changing menu appearance to display favorite icon
         val activity = this.activity as MainActivity
         activity.changeMenu(R.menu.menu_details,found)
     }

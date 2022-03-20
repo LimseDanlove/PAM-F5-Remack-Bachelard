@@ -11,14 +11,13 @@ class SuperHero() : Parcelable {
     var id: Int = 0
     var name: String = ""
 
-    //@SerialName("biography")
     var biography: Biography = Biography()
     var appearance: Appearance = Appearance()
     var work: Work = Work()
     var image: Image = Image()
     var connections: Connections = Connections()
 
-
+    // Specific constructor needed for parsing
     constructor(shd: SuperHeroData) : this() {
         this.id = shd.id
         this.name = shd.name

@@ -8,8 +8,6 @@
     tools:context=".SearchListFragment"
     >
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:id="@+id/listTitleSearch"
         android:layout_width="wrap_content"

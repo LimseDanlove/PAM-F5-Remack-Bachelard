@@ -16,6 +16,7 @@ import kotlinx.serialization.json.jsonObject
 class APIClient(cio : CIO) {
     private val client : HttpClient = HttpClient(cio)
 
+    // Finding a superhero by id
     suspend fun getSH(id : Int) : SuperHero {
         val httpResponse: HttpResponse = client.get("https://www.superheroapi.com/api.php/1106077463536216/$id")
         val body: String = httpResponse.receive()
@@ -23,37 +24,22 @@ class APIClient(cio : CIO) {
         return ParseSuperHero.fromJson(body)
     }
 
-    suspend fun getFirstSH(firsts : Int): ArrayList<SuperHero>{
-        val list = ArrayList<SuperHero>()
-        var max = firsts
-
-        if(max > 731){
-            max = 731
-        }
-
-        for (i in 1..firsts) {
-            list.add(getSH(i))
-        }
-
-        return list
-    }
-
+    // Finding superhero by name (search bar)
     suspend fun getSH(name: String): ArrayList<SuperHero>{
-        // maybe put API token as attribute ?
         val httpResponse: HttpResponse = client.get("https://www.superheroapi.com/api.php/1106077463536216/search/$name")
         val listSH = ArrayList<SuperHero>()
 
         if(httpResponse.status == HttpStatusCode.OK) {
-            // get body as JsonElement object
+            // Get body as JsonElement object
             val jsonBody : JsonElement = Json.decodeFromString(JsonElement.serializer(),httpResponse.receive())
 
-            // parse each result from array results
+            // Parse each result from array results
             if(jsonBody.jsonObject["results"] != null) {
-                // get "results" JsonElement
+                // Get "results" JsonElement
                 val results = Json.decodeFromString(JsonElement.serializer(),jsonBody.jsonObject["results"].toString())
 
                 for (i in 0 until results.jsonArray.size) {
-                    // right place to parse ?
+                    // Parsing elements
                     listSH.add(ParseSuperHero.fromJson(results.jsonArray[i].toString()))
                 }
             }

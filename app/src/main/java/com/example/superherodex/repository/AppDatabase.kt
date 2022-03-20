@@ -17,6 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
 
+                // Creation of database if not already created
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,

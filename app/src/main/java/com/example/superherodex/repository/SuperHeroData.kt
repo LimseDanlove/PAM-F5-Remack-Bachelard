@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// Database schema definition
 @Entity(tableName="superhero")
 data class SuperHeroData (
     @PrimaryKey val id: Int,

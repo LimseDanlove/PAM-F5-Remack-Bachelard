@@ -14,51 +14,42 @@ class SuperHeroAdapter(private val model: SuperHeroViewModel) :
         private var clickListener: ClickListener? = null
     }
 
-    /**
-      * Provide a reference to the type of views that you are using
-      * (custom ViewHolder).
-    */
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-            val textView: TextView = view.findViewById(R.id.tv_sh_row)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        val textView: TextView = view.findViewById(R.id.tv_sh_row)
 
-            init {
-                view.setOnClickListener(this)
-            }
-
-            override fun onClick(v: View?) {
-                clickListener?.onItemClick(adapterPosition, v)
-            }
-
-
+        init {
+            view.setOnClickListener(this)
         }
 
-        // Create new views (invoked by the layout manager)
-        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-            // Create a new view, which defines the UI of the list item
-            val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.sh_row_item, viewGroup, false)
-            return ViewHolder(view)
+        override fun onClick(v: View?) {
+            clickListener?.onItemClick(adapterPosition, v)
         }
+    }
 
-        // Replace the contents of a view (invoked by the layout manager)
-        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        // Create a new view, which defines the UI of the list item
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.sh_row_item, viewGroup, false)
+        return ViewHolder(view)
+    }
 
-            // Get element from your dataset at this position and replace the
-            // contents of the view with that element
-            viewHolder.textView.text = model.getList().value?.get(position).toString()
-        }
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        // Get element from your dataset at this position and replace the contents of the view with that element
+        viewHolder.textView.text = model.getList().value?.get(position).toString()
+    }
 
-        // Return the size of your dataset (invoked by the layout manager)
-        override fun getItemCount() = model.getList().value?.size ?: 0
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = model.getList().value?.size ?: 0
 
+    interface ClickListener {
+        fun onItemClick(position: Int, v: View?)
+    }
 
-        interface ClickListener {
-            fun onItemClick(position: Int, v: View?)
-        }
-
-        fun setOnItemClickListener(clickListener: ClickListener) {
-            Companion.clickListener = clickListener
-        }
+    fun setOnItemClickListener(clickListener: ClickListener) {
+        Companion.clickListener = clickListener
+    }
 }
 
 

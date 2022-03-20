@@ -39,8 +39,8 @@ class SHListFragment : Fragment() {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerViewSH);
         val model = SuperHeroViewModel()
 
+        // Displaying all favorite superheroes
         model.replaceList(shService.getAll())
-
         model.getList().observe(viewLifecycleOwner, Observer<List<SuperHero>>{ shs ->
             recyclerView?.adapter = SuperHeroAdapter(model).apply {
                 setOnItemClickListener(object : SuperHeroAdapter.ClickListener {
@@ -52,12 +52,14 @@ class SHListFragment : Fragment() {
                 })
             }
         })
+
         return view
     }
 
     override fun onStart() {
         super.onStart()
 
+        // Changing menu appearance to display search icon
         val activity = this.activity as MainActivity
         activity.changeMenu(R.menu.menu,false)
     }
